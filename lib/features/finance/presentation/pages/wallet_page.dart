@@ -465,7 +465,9 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                     ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary.withValues(alpha: 0.08),
+                        backgroundColor: AppColors.primary.withValues(
+                          alpha: 0.08,
+                        ),
                         foregroundColor: AppColors.primary,
                         shadowColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(

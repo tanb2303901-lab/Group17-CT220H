@@ -236,7 +236,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     color: AppColors.primary,
                   ),
                   onDeleted: _clearMonthFilter,
-                  backgroundColor: AppColors.primaryContainer.withValues(alpha: 0.2),
+                  backgroundColor: AppColors.primaryContainer.withValues(
+                    alpha: 0.2,
+                  ),
                 ),
               ),
             // ── Filter button ──

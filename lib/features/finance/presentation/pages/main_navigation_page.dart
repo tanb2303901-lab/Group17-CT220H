@@ -143,7 +143,9 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                     color: AppColors.primary,
                   ),
                   onDeleted: _clearMonthFilter,
-                  backgroundColor: AppColors.primaryContainer.withValues(alpha: 0.15),
+                  backgroundColor: AppColors.primaryContainer.withValues(
+                    alpha: 0.15,
+                  ),
                 ),
               ),
             // Nút mở chọn tháng
