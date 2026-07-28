@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "225573553200",
+    "project_id": "beesaving-stuapp-2026",
+    "storage_bucket": "beesaving-stuapp-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225573553200:android:1c8ff182c8f2081b9ed9f5",
+        "android_client_info": {
+          "package_name": "com.beesaving.beesaving"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF90NUFtbntbsH4QwmMeqwHtciPnaMs_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
