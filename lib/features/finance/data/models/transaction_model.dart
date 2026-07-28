@@ -18,8 +18,8 @@ class TransactionModel extends Transaction {
       amount: (json['amount'] as num? ?? 0.0).toDouble(),
       type: json['type'] as String? ?? 'expense',
       category: json['category'] as String? ?? 'Khác',
-      date: json['date'] != null 
-          ? DateTime.parse(json['date'] as String) 
+      date: json['date'] != null
+          ? DateTime.parse(json['date'] as String)
           : DateTime.now(),
       importanceScore: json['importanceScore'] as int? ?? 3,
     );

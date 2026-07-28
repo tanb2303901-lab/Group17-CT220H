@@ -57,17 +57,21 @@ class _RegisterPageState extends State<RegisterPage>
           content: const Text('Vui lòng đồng ý với Điều khoản Dịch vụ'),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
       return;
     }
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<AuthBloc>().add(RegisterRequested(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-            displayName: _nameController.text.trim(),
-          ));
+      context.read<AuthBloc>().add(
+        RegisterRequested(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          displayName: _nameController.text.trim(),
+        ),
+      );
     }
   }
 
@@ -87,7 +91,8 @@ class _RegisterPageState extends State<RegisterPage>
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           );
         }
@@ -207,8 +212,11 @@ class _RegisterPageState extends State<RegisterPage>
         Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: AppColors.primary, size: 20),
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: AppColors.primary,
+                size: 20,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
           ],
@@ -384,11 +392,11 @@ class _RegisterPageState extends State<RegisterPage>
                 height: 24,
                 child: Checkbox(
                   value: _acceptTerms,
-                  onChanged: (v) =>
-                      setState(() => _acceptTerms = v ?? false),
+                  onChanged: (v) => setState(() => _acceptTerms = v ?? false),
                   activeColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
@@ -529,8 +537,10 @@ class _RegisterPageState extends State<RegisterPage>
               borderRadius: BorderRadius.circular(14),
               borderSide: BorderSide(color: AppColors.error, width: 2),
             ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 14,
+            ),
           ),
           validator: validator,
         ),

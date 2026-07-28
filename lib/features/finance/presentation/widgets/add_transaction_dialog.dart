@@ -18,7 +18,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  
+
   String _transactionType = 'expense'; // 'income' hoặc 'expense'
   String _category = 'Ăn uống';
   DateTime _selectedDate = DateTime.now();
@@ -32,7 +32,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
     'Mua sắm',
     'Giáo dục',
     'Giải trí',
-    'Khác'
+    'Khác',
   ];
 
   final List<String> _incomeCategories = [
@@ -40,7 +40,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
     'Thu nhập thêm',
     'Kinh doanh',
     'Đầu tư',
-    'Khác'
+    'Khác',
   ];
 
   @override
@@ -128,7 +128,9 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = _transactionType == 'expense' ? _expenseCategories : _incomeCategories;
+    final categories = _transactionType == 'expense'
+        ? _expenseCategories
+        : _incomeCategories;
 
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -145,10 +147,11 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.initialTransaction != null ? 'Cập nhật Giao Dịch' : 'Thêm Giao Dịch Mới',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            color: AppColors.primary,
-                          ),
+                      widget.initialTransaction != null
+                          ? 'Cập nhật Giao Dịch'
+                          : 'Thêm Giao Dịch Mới',
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(color: AppColors.primary),
                     ),
                     IconButton(
                       icon: const Icon(Icons.close, color: AppColors.outline),
@@ -157,7 +160,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                
+
                 // Toggle Loại giao dịch
                 Row(
                   children: [
@@ -230,7 +233,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Tiêu đề
                 TextFormField(
                   controller: _titleController,
@@ -247,7 +250,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   },
                 ),
                 const SizedBox(height: 16),
-                
+
                 // Số tiền
                 TextFormField(
                   controller: _amountController,
@@ -269,7 +272,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   },
                 ),
                 const SizedBox(height: 16),
-                
+
                 // Danh mục & Ngày
                 Row(
                   children: [
@@ -281,10 +284,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                           prefixIcon: Icon(Icons.category),
                         ),
                         items: categories.map((cat) {
-                          return DropdownMenuItem(
-                            value: cat,
-                            child: Text(cat),
-                          );
+                          return DropdownMenuItem(value: cat, child: Text(cat));
                         }).toList(),
                         onChanged: (val) {
                           if (val != null) {
@@ -314,7 +314,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                
+
                 // Độ quan trọng (Chỉ hiển thị cho Chi Tiêu)
                 if (_transactionType == 'expense') ...[
                   Card(
@@ -372,13 +372,16 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   ),
                   const SizedBox(height: 20),
                 ],
-                
+
                 // Nút hành động
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      child: const Text('Hủy', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                      child: const Text(
+                        'Hủy',
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 12),
@@ -393,12 +396,18 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                             type: _transactionType,
                             category: _category,
                             date: _selectedDate,
-                            importanceScore: _transactionType == 'expense' ? _importanceScore : 5,
+                            importanceScore: _transactionType == 'expense'
+                                ? _importanceScore
+                                : 5,
                           );
                           if (widget.initialTransaction != null) {
-                            BlocProvider.of<FinanceBloc>(context).add(UpdateTransactionEvent(transaction));
+                            BlocProvider.of<FinanceBloc>(
+                              context,
+                            ).add(UpdateTransactionEvent(transaction));
                           } else {
-                            BlocProvider.of<FinanceBloc>(context).add(AddTransactionEvent(transaction));
+                            BlocProvider.of<FinanceBloc>(
+                              context,
+                            ).add(AddTransactionEvent(transaction));
                           }
                           Navigator.pop(context);
                         }

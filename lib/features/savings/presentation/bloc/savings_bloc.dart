@@ -6,9 +6,7 @@ import 'savings_state.dart';
 class SavingsBloc extends Bloc<SavingsEvent, SavingsState> {
   final CalculateSavingsPlan calculateSavingsPlan;
 
-  SavingsBloc({
-    required this.calculateSavingsPlan,
-  }) : super(SavingsInitial()) {
+  SavingsBloc({required this.calculateSavingsPlan}) : super(SavingsInitial()) {
     on<CalculatePlanEvent>(_onCalculatePlan);
     on<ResetPlannerEvent>(_onResetPlanner);
   }
@@ -31,10 +29,7 @@ class SavingsBloc extends Bloc<SavingsEvent, SavingsState> {
     }
   }
 
-  void _onResetPlanner(
-    ResetPlannerEvent event,
-    Emitter<SavingsState> emit,
-  ) {
+  void _onResetPlanner(ResetPlannerEvent event, Emitter<SavingsState> emit) {
     emit(SavingsInitial());
   }
 }

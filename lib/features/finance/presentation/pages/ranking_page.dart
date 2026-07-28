@@ -11,10 +11,14 @@ import '../../domain/entities/transaction.dart';
 class RankingPage extends StatelessWidget {
   const RankingPage({super.key});
 
-  void _showAddTransactionDialog(BuildContext context, [Transaction? transaction]) {
+  void _showAddTransactionDialog(
+    BuildContext context, [
+    Transaction? transaction,
+  ]) {
     showDialog(
       context: context,
-      builder: (context) => AddTransactionDialog(initialTransaction: transaction),
+      builder: (context) =>
+          AddTransactionDialog(initialTransaction: transaction),
     );
   }
 
@@ -33,7 +37,10 @@ class RankingPage extends StatelessWidget {
               unselectedLabelColor: Colors.grey,
               indicatorColor: AppColors.primary,
               indicatorWeight: 3,
-              labelStyle: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 14),
+              labelStyle: GoogleFonts.quicksand(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
               tabs: const [
                 Tab(text: 'Chi Tiêu'),
                 Tab(text: 'Độ Quan Trọng'),
@@ -45,12 +52,18 @@ class RankingPage extends StatelessWidget {
         body: BlocBuilder<FinanceBloc, FinanceState>(
           builder: (context, state) {
             if (state is FinanceLoading) {
-              return const Center(child: CircularProgressIndicator(color: AppColors.primary));
+              return const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
+              );
             } else if (state is FinanceError) {
               return Center(child: Text(state.message));
             } else if (state is FinanceLoaded) {
-              final expenses = state.transactions.where((t) => t.isExpense).toList();
-              final incomes = state.transactions.where((t) => t.isIncome).toList();
+              final expenses = state.transactions
+                  .where((t) => t.isExpense)
+                  .toList();
+              final incomes = state.transactions
+                  .where((t) => t.isIncome)
+                  .toList();
 
               return TabBarView(
                 children: [
@@ -68,7 +81,11 @@ class RankingPage extends StatelessWidget {
   }
 
   // ── 1. Tab Xếp hạng chi tiêu theo danh mục ──
-  Widget _buildExpensesRanking(BuildContext context, List<dynamic> expenses, double totalExpense) {
+  Widget _buildExpensesRanking(
+    BuildContext context,
+    List<dynamic> expenses,
+    double totalExpense,
+  ) {
     final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
 
     if (expenses.isEmpty) {
@@ -99,10 +116,17 @@ class RankingPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Tổng chi tiêu tháng này:', style: TextStyle(fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Tổng chi tiêu tháng này:',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                     Text(
                       currencyFormat.format(totalExpense),
-                      style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.error),
+                      style: GoogleFonts.quicksand(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: AppColors.error,
+                      ),
                     ),
                   ],
                 ),
@@ -135,12 +159,19 @@ class RankingPage extends StatelessWidget {
                             color: color.withOpacity(0.1),
                             shape: BoxShape.circle,
                           ),
-                          child: Icon(_getCategoryIcon(category), color: color, size: 18),
+                          child: Icon(
+                            _getCategoryIcon(category),
+                            color: color,
+                            size: 18,
+                          ),
                         ),
                         const SizedBox(width: 8),
                         Text(
                           category,
-                          style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: GoogleFonts.quicksand(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),
@@ -149,11 +180,17 @@ class RankingPage extends StatelessWidget {
                       children: [
                         Text(
                           currencyFormat.format(amount),
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                         Text(
                           '${(percentage * 100).toStringAsFixed(1)}%',
-                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -186,22 +223,36 @@ class RankingPage extends StatelessWidget {
     }
 
     // Phân loại các giao dịch theo tầm quan trọng
-    final unessentialExpenses = expenses.where((e) => e.importanceScore <= 2).toList();
-    final essentialExpenses = expenses.where((e) => e.importanceScore >= 3).toList();
+    final unessentialExpenses = expenses
+        .where((e) => e.importanceScore <= 2)
+        .toList();
+    final essentialExpenses = expenses
+        .where((e) => e.importanceScore >= 3)
+        .toList();
 
     // Sắp xếp các khoản không thiết yếu từ lớn nhất đến nhỏ nhất
     unessentialExpenses.sort((a, b) => b.amount.compareTo(a.amount));
     // Tính tổng số tiền không thiết yếu
-    final double totalUnessentialSum = unessentialExpenses.fold(0.0, (sum, e) => sum + e.amount);
-    final double totalExpensesSum = expenses.fold(0.0, (sum, e) => sum + e.amount);
-    final double unessentialRatio = totalExpensesSum > 0 ? totalUnessentialSum / totalExpensesSum : 0.0;
+    final double totalUnessentialSum = unessentialExpenses.fold(
+      0.0,
+      (sum, e) => sum + e.amount,
+    );
+    final double totalExpensesSum = expenses.fold(
+      0.0,
+      (sum, e) => sum + e.amount,
+    );
+    final double unessentialRatio = totalExpensesSum > 0
+        ? totalUnessentialSum / totalExpensesSum
+        : 0.0;
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         // Card Tóm tắt
         Card(
-          color: totalUnessentialSum > 2000000 ? AppColors.errorContainer.withOpacity(0.4) : AppColors.surfaceContainerLow,
+          color: totalUnessentialSum > 2000000
+              ? AppColors.errorContainer.withOpacity(0.4)
+              : AppColors.surfaceContainerLow,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -212,11 +263,19 @@ class RankingPage extends StatelessWidget {
                   children: [
                     Text(
                       'Chi tiêu không thiết yếu (1-2★):',
-                      style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.onBackground),
+                      style: GoogleFonts.quicksand(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: AppColors.onBackground,
+                      ),
                     ),
                     Text(
                       currencyFormat.format(totalUnessentialSum),
-                      style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.error),
+                      style: GoogleFonts.quicksand(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: AppColors.error,
+                      ),
                     ),
                   ],
                 ),
@@ -251,7 +310,11 @@ class RankingPage extends StatelessWidget {
                     totalUnessentialSum > 0
                         ? "Ong Lucky nhận thấy bạn chi ${currencyFormat.format(totalUnessentialSum)} vào các khoản không thiết yếu như trà sữa, xem phim, mua sắm. Cắt giảm 50% các khoản này sẽ giúp bạn bỏ túi thêm ${currencyFormat.format(totalUnessentialSum / 2)} đấy!"
                         : "Tuyệt vời! Bạn không có khoản chi tiêu lãng phí nào tháng này. Hãy tiếp tục giữ vững phong độ nhé! 🐝",
-                    style: const TextStyle(fontSize: 13, height: 1.4, color: AppColors.onSurfaceVariant),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      height: 1.4,
+                      color: AppColors.onSurfaceVariant,
+                    ),
                   ),
                 ),
               ],
@@ -266,14 +329,25 @@ class RankingPage extends StatelessWidget {
           children: [
             Text(
               'Danh sách cần cắt giảm trước',
-              style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.onBackground),
+              style: GoogleFonts.quicksand(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: AppColors.onBackground,
+              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: Colors.red[50],
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: Text(
                 '${unessentialExpenses.length} khoản chi',
-                style: TextStyle(color: Colors.red[800], fontSize: 11, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Colors.red[800],
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -283,34 +357,56 @@ class RankingPage extends StatelessWidget {
         if (unessentialExpenses.isEmpty)
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 24),
-            child: Center(child: Text('Không có khoản chi độ quan trọng thấp nào.', style: TextStyle(color: Colors.grey))),
+            child: Center(
+              child: Text(
+                'Không có khoản chi độ quan trọng thấp nào.',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
           )
         else
-          ...unessentialExpenses.map((e) => _buildTransactionRankingCard(context, e, currencyFormat)),
+          ...unessentialExpenses.map(
+            (e) => _buildTransactionRankingCard(context, e, currencyFormat),
+          ),
 
         const SizedBox(height: 16),
         // Danh sách các khoản thiết yếu
         Text(
           'Các khoản chi thiết yếu (3-5★)',
-          style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.onBackground),
+          style: GoogleFonts.quicksand(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: AppColors.onBackground,
+          ),
         ),
         const SizedBox(height: 8),
 
         if (essentialExpenses.isEmpty)
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 24),
-            child: Center(child: Text('Không có khoản chi thiết yếu.', style: TextStyle(color: Colors.grey))),
+            child: Center(
+              child: Text(
+                'Không có khoản chi thiết yếu.',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
           )
         else
-          ...essentialExpenses.map((e) => _buildTransactionRankingCard(context, e, currencyFormat)),
-          
+          ...essentialExpenses.map(
+            (e) => _buildTransactionRankingCard(context, e, currencyFormat),
+          ),
+
         const SizedBox(height: 80),
       ],
     );
   }
 
   // ── 3. Tab Xếp hạng nguồn thu ──
-  Widget _buildIncomesRanking(BuildContext context, List<dynamic> incomes, double totalIncome) {
+  Widget _buildIncomesRanking(
+    BuildContext context,
+    List<dynamic> incomes,
+    double totalIncome,
+  ) {
     final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
 
     if (incomes.isEmpty) {
@@ -341,10 +437,17 @@ class RankingPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Tổng thu nhập tháng này:', style: TextStyle(fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Tổng thu nhập tháng này:',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                     Text(
                       currencyFormat.format(totalIncome),
-                      style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.green),
+                      style: GoogleFonts.quicksand(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.green,
+                      ),
                     ),
                   ],
                 ),
@@ -377,12 +480,19 @@ class RankingPage extends StatelessWidget {
                             color: color.withOpacity(0.1),
                             shape: BoxShape.circle,
                           ),
-                          child: Icon(_getCategoryIcon(category), color: color, size: 18),
+                          child: Icon(
+                            _getCategoryIcon(category),
+                            color: color,
+                            size: 18,
+                          ),
                         ),
                         const SizedBox(width: 8),
                         Text(
                           category,
-                          style: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: GoogleFonts.quicksand(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),
@@ -391,11 +501,17 @@ class RankingPage extends StatelessWidget {
                       children: [
                         Text(
                           currencyFormat.format(amount),
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                         Text(
                           '${(percentage * 100).toStringAsFixed(1)}%',
-                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -432,7 +548,11 @@ class RankingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTransactionRankingCard(BuildContext context, dynamic transaction, NumberFormat format) {
+  Widget _buildTransactionRankingCard(
+    BuildContext context,
+    dynamic transaction,
+    NumberFormat format,
+  ) {
     final isExpense = transaction.isExpense;
     final color = _getCategoryColor(transaction.category);
 
@@ -446,7 +566,11 @@ class RankingPage extends StatelessWidget {
             color: color.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: Icon(_getCategoryIcon(transaction.category), color: color, size: 18),
+          child: Icon(
+            _getCategoryIcon(transaction.category),
+            color: color,
+            size: 18,
+          ),
         ),
         title: Text(
           transaction.title,
@@ -457,13 +581,17 @@ class RankingPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: transaction.importanceScore <= 2 ? Colors.green[50] : Colors.orange[50],
+                color: transaction.importanceScore <= 2
+                    ? Colors.green[50]
+                    : Colors.orange[50],
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
                 'Độ quan trọng: ${transaction.importanceScore}/5',
                 style: TextStyle(
-                  color: transaction.importanceScore <= 2 ? Colors.green[800] : Colors.orange[800],
+                  color: transaction.importanceScore <= 2
+                      ? Colors.green[800]
+                      : Colors.orange[800],
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),
@@ -532,5 +660,4 @@ class RankingPage extends StatelessWidget {
         return Colors.grey;
     }
   }
-
 }

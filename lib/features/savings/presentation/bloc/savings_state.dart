@@ -16,10 +16,7 @@ class SavingsCalculated extends SavingsState {
   final SavingsPlan plan;
   final double targetSavings;
 
-  const SavingsCalculated({
-    required this.plan,
-    required this.targetSavings,
-  });
+  const SavingsCalculated({required this.plan, required this.targetSavings});
 
   @override
   List<Object?> get props => [plan, targetSavings];

@@ -142,7 +142,9 @@ class LocalTransactionRepository implements TransactionRepository {
 
   @override
   Future<void> updateTransaction(Transaction transaction) async {
-    final index = _transactions.indexWhere((element) => element.id == transaction.id);
+    final index = _transactions.indexWhere(
+      (element) => element.id == transaction.id,
+    );
     if (index != -1) {
       _transactions[index] = transaction;
     }

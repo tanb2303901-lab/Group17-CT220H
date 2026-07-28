@@ -37,10 +37,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _showAddTransactionDialog(BuildContext context, [Transaction? transaction]) {
+  void _showAddTransactionDialog(
+    BuildContext context, [
+    Transaction? transaction,
+  ]) {
     showDialog(
       context: context,
-      builder: (context) => AddTransactionDialog(initialTransaction: transaction),
+      builder: (context) =>
+          AddTransactionDialog(initialTransaction: transaction),
     );
   }
 
@@ -63,13 +67,19 @@ class _HomePageState extends State<HomePage> {
           final authState = context.read<AuthBloc>().state;
           String displayName = 'Người dùng';
           if (authState is AuthAuthenticated) {
-            displayName = authState.user.displayName ??
+            displayName =
+                authState.user.displayName ??
                 authState.user.email.split('@').first;
           }
 
           // Tính toán tiến độ tiết kiệm
-          final double savedAmount = financeState.balance > 0 ? financeState.balance : 0;
-          final double savingProgress = (savedAmount / _mockSavingTarget).clamp(0.0, 1.0);
+          final double savedAmount = financeState.balance > 0
+              ? financeState.balance
+              : 0;
+          final double savingProgress = (savedAmount / _mockSavingTarget).clamp(
+            0.0,
+            1.0,
+          );
 
           return RefreshIndicator(
             onRefresh: () async {
@@ -77,7 +87,10 @@ class _HomePageState extends State<HomePage> {
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -106,7 +119,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -120,7 +132,9 @@ class _HomePageState extends State<HomePage> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: AppColors.primary.withOpacity(0.1)),
+                      side: BorderSide(
+                        color: AppColors.primary.withOpacity(0.1),
+                      ),
                     ),
                     color: AppColors.white,
                     child: Padding(
@@ -131,10 +145,15 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppColors.secondaryContainer.withOpacity(0.2),
+                              color: AppColors.secondaryContainer.withOpacity(
+                                0.2,
+                              ),
                               shape: BoxShape.circle,
                             ),
-                            child: const Text('🐝', style: TextStyle(fontSize: 28)),
+                            child: const Text(
+                              '🐝',
+                              style: TextStyle(fontSize: 28),
+                            ),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -151,7 +170,10 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  _getMascotAdvice(financeState.balance, expenseRatio),
+                                  _getMascotAdvice(
+                                    financeState.balance,
+                                    expenseRatio,
+                                  ),
                                   style: const TextStyle(
                                     fontSize: 13,
                                     height: 1.4,
@@ -198,13 +220,15 @@ class _HomePageState extends State<HomePage> {
                         icon: Icons.account_balance_wallet_outlined,
                         label: 'Quản lý Ví',
                         color: Colors.blue,
-                        onTap: () => widget.onTabChange(1), // Chuyển sang Tab Wallet
+                        onTap: () =>
+                            widget.onTabChange(1), // Chuyển sang Tab Wallet
                       ),
                       _buildQuickActionItem(
                         icon: Icons.analytics_outlined,
                         label: 'Xếp hạng chi',
                         color: Colors.orange,
-                        onTap: () => widget.onTabChange(2), // Chuyển sang Tab Ranking
+                        onTap: () =>
+                            widget.onTabChange(2), // Chuyển sang Tab Ranking
                       ),
                     ],
                   ),
@@ -213,7 +237,9 @@ class _HomePageState extends State<HomePage> {
                   // ── Tiến trình Hũ tiết kiệm ──
                   Card(
                     color: AppColors.surfaceContainerLow,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Column(
@@ -224,7 +250,11 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.savings, color: AppColors.secondary, size: 20),
+                                  const Icon(
+                                    Icons.savings,
+                                    color: AppColors.secondary,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     'Hũ mật tiết kiệm',
@@ -261,9 +291,15 @@ class _HomePageState extends State<HomePage> {
                               // Con ong nhỏ bay theo tiến trình
                               if (savingProgress > 0.05)
                                 Positioned(
-                                  left: (MediaQuery.of(context).size.width - 70) * savingProgress - 15,
+                                  left:
+                                      (MediaQuery.of(context).size.width - 70) *
+                                          savingProgress -
+                                      15,
                                   top: -4,
-                                  child: const Text('🐝', style: TextStyle(fontSize: 12)),
+                                  child: const Text(
+                                    '🐝',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
                                 ),
                             ],
                           ),
@@ -273,11 +309,18 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 'Đã có: ${_currencyFormat.format(savedAmount)}',
-                                style: TextStyle(color: Colors.grey[700], fontSize: 12, fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               Text(
                                 'Mục tiêu: ${_currencyFormat.format(_mockSavingTarget)}',
-                                style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 12,
+                                ),
                               ),
                             ],
                           ),
@@ -300,10 +343,15 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => widget.onTabChange(2), // Chuyển sang Tab Ranking để xem chi tiết
+                        onPressed: () => widget.onTabChange(
+                          2,
+                        ), // Chuyển sang Tab Ranking để xem chi tiết
                         child: const Text(
                           'Xem tất cả',
-                          style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -357,7 +405,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white24,
                   borderRadius: BorderRadius.circular(12),
@@ -368,7 +419,11 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 4),
                     Text(
                       'An toàn',
-                      style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -388,9 +443,19 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildBalanceStat('Thu nhập', state.totalIncome, Icons.arrow_downward, Colors.greenAccent),
+              _buildBalanceStat(
+                'Thu nhập',
+                state.totalIncome,
+                Icons.arrow_downward,
+                Colors.greenAccent,
+              ),
               Container(height: 30, width: 1, color: Colors.white24),
-              _buildBalanceStat('Chi tiêu', state.totalExpense, Icons.arrow_upward, Colors.redAccent),
+              _buildBalanceStat(
+                'Chi tiêu',
+                state.totalExpense,
+                Icons.arrow_upward,
+                Colors.redAccent,
+              ),
             ],
           ),
         ],
@@ -398,7 +463,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildBalanceStat(String label, double amount, IconData icon, Color iconColor) {
+  Widget _buildBalanceStat(
+    String label,
+    double amount,
+    IconData icon,
+    Color iconColor,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -406,7 +476,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             Icon(icon, color: iconColor, size: 14),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+            ),
           ],
         ),
         const SizedBox(height: 4),
@@ -464,7 +537,11 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            Icon(Icons.receipt_long_outlined, size: 40, color: Colors.grey[400]),
+            Icon(
+              Icons.receipt_long_outlined,
+              size: 40,
+              color: Colors.grey[400],
+            ),
             const SizedBox(height: 10),
             Text(
               'Chưa có giao dịch nào được ghi lại hôm nay.',
@@ -499,7 +576,11 @@ class _HomePageState extends State<HomePage> {
                 color: color.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(_getCategoryIcon(transaction.category), color: color, size: 20),
+              child: Icon(
+                _getCategoryIcon(transaction.category),
+                color: color,
+                size: 20,
+              ),
             ),
             title: Text(
               transaction.title,

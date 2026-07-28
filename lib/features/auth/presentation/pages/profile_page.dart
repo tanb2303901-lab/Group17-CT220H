@@ -19,7 +19,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
-  
+
   // Các biến cấu hình cài đặt giả lập
   bool _darkMode = false;
   bool _dailyReminder = true;
@@ -34,7 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
           'Đăng xuất',
           style: GoogleFonts.quicksand(fontWeight: FontWeight.bold),
         ),
-        content: const Text('Bạn có chắc chắn muốn đăng xuất khỏi BeeSaving không?'),
+        content: const Text(
+          'Bạn có chắc chắn muốn đăng xuất khỏi BeeSaving không?',
+        ),
         actions: [
           TextButton(
             child: const Text('Hủy'),
@@ -43,7 +45,10 @@ class _ProfilePageState extends State<ProfilePage> {
           TextButton(
             child: const Text(
               'Đăng xuất',
-              style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: AppColors.error,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             onPressed: () {
               Navigator.pop(ctx);
@@ -67,25 +72,25 @@ class _ProfilePageState extends State<ProfilePage> {
       return {
         'title': 'Ong Chúa (Queen Bee) 👑',
         'desc': 'Tiết kiệm xuất sắc trên 50% thu nhập!',
-        'color': '0xFFFCD400'
+        'color': '0xFFFCD400',
       };
     } else if (savingRate >= 0.3) {
       return {
         'title': 'Ong Trưởng Thành (Pro Bee) 🐝',
         'desc': 'Tích lũy tốt từ 30% - 50% thu nhập!',
-        'color': '0xFF4CAF50'
+        'color': '0xFF4CAF50',
       };
     } else if (savingRate >= 0.1) {
       return {
         'title': 'Ong Chăm Chỉ (Worker Bee) 🍀',
         'desc': 'Đang cố gắng tích lũy từ 10% - 30%!',
-        'color': '0xFF2196F3'
+        'color': '0xFF2196F3',
       };
     } else {
       return {
         'title': 'Ong Non (Baby Bee) 👶',
         'desc': 'Tỷ lệ tích lũy còn thấp (<10%), cố gắng lên nha!',
-        'color': '0xFFBA1A1A'
+        'color': '0xFFBA1A1A',
       };
     }
   }
@@ -97,7 +102,9 @@ class _ProfilePageState extends State<ProfilePage> {
         String displayName = 'Người dùng';
         String email = 'user@beesaving.com';
         if (authState is AuthAuthenticated) {
-          displayName = authState.user.displayName ?? authState.user.email.split('@').first;
+          displayName =
+              authState.user.displayName ??
+              authState.user.email.split('@').first;
           email = authState.user.email;
         }
 
@@ -127,7 +134,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   Center(
                     child: Column(
                       children: [
-
                         Text(
                           displayName,
                           style: GoogleFonts.quicksand(
@@ -139,7 +145,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(height: 2),
                         Text(
                           email,
-                          style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 13,
+                          ),
                         ),
                       ],
                     ),
@@ -151,7 +160,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: badgeColor.withOpacity(0.2), width: 1.5),
+                      side: BorderSide(
+                        color: badgeColor.withOpacity(0.2),
+                        width: 1.5,
+                      ),
                     ),
                     color: badgeColor.withOpacity(0.06),
                     child: Padding(
@@ -164,7 +176,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               color: badgeColor.withOpacity(0.15),
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(Icons.stars, color: badgeColor, size: 32),
+                            child: Icon(
+                              Icons.stars,
+                              color: badgeColor,
+                              size: 32,
+                            ),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -200,11 +216,23 @@ class _ProfilePageState extends State<ProfilePage> {
                   // ── CHỈ SỐ THỐNG KÊ NHANH ──
                   Row(
                     children: [
-                      _buildStatCard('Số dư tích lũy', _currencyFormat.format(balance), Colors.green),
+                      _buildStatCard(
+                        'Số dư tích lũy',
+                        _currencyFormat.format(balance),
+                        Colors.green,
+                      ),
                       const SizedBox(width: 12),
-                      _buildStatCard('Tỷ lệ tích lũy', '${savingRate.toStringAsFixed(0)}%', Colors.blue),
+                      _buildStatCard(
+                        'Tỷ lệ tích lũy',
+                        '${savingRate.toStringAsFixed(0)}%',
+                        Colors.blue,
+                      ),
                       const SizedBox(width: 12),
-                      _buildStatCard('Đã ghi chép', '$txCount giao dịch', Colors.orange),
+                      _buildStatCard(
+                        'Đã ghi chép',
+                        '$txCount giao dịch',
+                        Colors.orange,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 28),
@@ -229,7 +257,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       setState(() => _darkMode = val);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Chế độ tối đang được phát triển ở phiên bản kế tiếp! 🌗'),
+                          content: Text(
+                            'Chế độ tối đang được phát triển ở phiên bản kế tiếp! 🌗',
+                          ),
                           duration: Duration(seconds: 1),
                           behavior: SnackBarBehavior.floating,
                         ),
@@ -264,10 +294,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   Card(
                     margin: EdgeInsets.zero,
                     child: ListTile(
-                      leading: const Icon(Icons.help_outline_rounded, color: Colors.blue),
+                      leading: const Icon(
+                        Icons.help_outline_rounded,
+                        color: Colors.blue,
+                      ),
                       title: Text(
                         'Trợ giúp & Liên hệ',
-                        style: GoogleFonts.quicksand(fontWeight: FontWeight.w600, fontSize: 14),
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
                       ),
                       trailing: const Icon(Icons.chevron_right, size: 20),
                       onTap: () {
@@ -275,10 +311,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           context: context,
                           applicationName: 'BeeSaving',
                           applicationVersion: '1.0.0',
-                          applicationLegalese: '© 2026 BeeSaving Dev Team. Bản quyền được bảo lưu.',
+                          applicationLegalese:
+                              '© 2026 BeeSaving Dev Team. Bản quyền được bảo lưu.',
                           children: [
                             const SizedBox(height: 12),
-                            const Text('BeeSaving là ứng dụng quản lý chi tiêu thông minh, giúp người dùng lập kế hoạch tiết kiệm hiệu quả nhờ thuật toán tối ưu hóa tầm quan trọng.'),
+                            const Text(
+                              'BeeSaving là ứng dụng quản lý chi tiêu thông minh, giúp người dùng lập kế hoạch tiết kiệm hiệu quả nhờ thuật toán tối ưu hóa tầm quan trọng.',
+                            ),
                           ],
                         );
                       },
@@ -293,10 +332,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       foregroundColor: AppColors.error,
                       shadowColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                     icon: const Icon(Icons.logout_rounded),
-                    label: const Text('Đăng xuất tài khoản', style: TextStyle(fontWeight: FontWeight.bold)),
+                    label: const Text(
+                      'Đăng xuất tài khoản',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     onPressed: () => _showSignOutDialog(context),
                   ),
                   const SizedBox(height: 80),
@@ -320,7 +364,11 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Text(
                 label,
-                style: TextStyle(color: Colors.grey[600], fontSize: 11, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 6),
               Text(
@@ -352,7 +400,10 @@ class _ProfilePageState extends State<ProfilePage> {
         secondary: Icon(icon, color: AppColors.outline),
         title: Text(
           label,
-          style: GoogleFonts.quicksand(fontWeight: FontWeight.w600, fontSize: 14),
+          style: GoogleFonts.quicksand(
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
         ),
         value: value,
         activeColor: AppColors.primary,

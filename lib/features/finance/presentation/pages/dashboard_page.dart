@@ -32,10 +32,14 @@ class _DashboardPageState extends State<DashboardPage> {
     BlocProvider.of<FinanceBloc>(context).add(FetchTransactionsEvent());
   }
 
-  void _showAddTransactionDialog(BuildContext context, [Transaction? transaction]) {
+  void _showAddTransactionDialog(
+    BuildContext context, [
+    Transaction? transaction,
+  ]) {
     showDialog(
       context: context,
-      builder: (context) => AddTransactionDialog(initialTransaction: transaction),
+      builder: (context) =>
+          AddTransactionDialog(initialTransaction: transaction),
     );
   }
 
@@ -63,9 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (picked != null) {
       setState(() => _selectedMonth = DateTime(picked.year, picked.month));
       if (mounted) {
-        context
-            .read<FinanceBloc>()
-            .add(FilterByMonthEvent(_selectedMonth));
+        context.read<FinanceBloc>().add(FilterByMonthEvent(_selectedMonth));
       }
     }
   }
@@ -81,15 +83,19 @@ class _DashboardPageState extends State<DashboardPage> {
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('Đăng xuất'),
-        content: const Text('Bạn có chắc chắn muốn đăng xuất khỏi BeeSaving không?'),
+        content: const Text(
+          'Bạn có chắc chắn muốn đăng xuất khỏi BeeSaving không?',
+        ),
         actions: [
           TextButton(
             child: const Text('Hủy'),
             onPressed: () => Navigator.pop(ctx),
           ),
           TextButton(
-            child: const Text('Đăng xuất',
-                style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'Đăng xuất',
+              style: TextStyle(color: AppColors.error),
+            ),
             onPressed: () {
               Navigator.pop(ctx);
               context.read<AuthBloc>().add(SignOutRequested());
@@ -213,13 +219,21 @@ class _DashboardPageState extends State<DashboardPage> {
                   label: Text(
                     DateFormat('MM/yyyy').format(_selectedMonth!),
                     style: const TextStyle(
-                        color: AppColors.primary, fontWeight: FontWeight.bold),
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  avatar: const Icon(Icons.calendar_month,
-                      size: 16, color: AppColors.primary),
+                  avatar: const Icon(
+                    Icons.calendar_month,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
                   onPressed: _clearMonthFilter,
-                  deleteIcon: const Icon(Icons.close,
-                      size: 14, color: AppColors.primary),
+                  deleteIcon: const Icon(
+                    Icons.close,
+                    size: 14,
+                    color: AppColors.primary,
+                  ),
                   onDeleted: _clearMonthFilter,
                   backgroundColor: AppColors.primaryContainer.withOpacity(0.2),
                 ),
@@ -260,7 +274,8 @@ class _DashboardPageState extends State<DashboardPage> {
           builder: (context, state) {
             if (state is FinanceLoading) {
               return const Center(
-                  child: CircularProgressIndicator(color: AppColors.primary));
+                child: CircularProgressIndicator(color: AppColors.primary),
+              );
             } else if (state is FinanceError) {
               return Center(child: Text(state.message));
             } else if (state is FinanceLoaded) {
@@ -295,8 +310,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                       .withOpacity(0.2),
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Text('🍀',
-                                    style: TextStyle(fontSize: 32)),
+                                child: const Text(
+                                  '🍀',
+                                  style: TextStyle(fontSize: 32),
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
@@ -316,7 +333,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                     const SizedBox(height: 4),
                                     Text(
                                       _getMascotAdvice(
-                                          state.balance, expenseRatio),
+                                        state.balance,
+                                        expenseRatio,
+                                      ),
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium
@@ -347,7 +366,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         label: const Text(
                           'LẬP KẾ HOẠCH TIẾT KIỆM THÔNG MINH (AI)',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -368,9 +389,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       if (state.categoryExpenses.isNotEmpty) ...[
                         Text(
                           'Phân Tích Chi Tiêu',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
+                          style: Theme.of(context).textTheme.headlineMedium
                               ?.copyWith(color: AppColors.onBackground),
                         ),
                         const SizedBox(height: 12),
@@ -384,15 +403,15 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           Text(
                             'Giao Dịch Gần Đây',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
+                            style: Theme.of(context).textTheme.headlineMedium
                                 ?.copyWith(color: AppColors.onBackground),
                           ),
                           Text(
                             '${state.transactions.length} giao dịch',
                             style: TextStyle(
-                                color: Colors.grey[600], fontSize: 13),
+                              color: Colors.grey[600],
+                              fontSize: 13,
+                            ),
                           ),
                         ],
                       ),
@@ -485,25 +504,37 @@ class _DashboardPageState extends State<DashboardPage> {
           const Text(
             'Số dư hiện tại',
             style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
+              color: Colors.white70,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             _currencyFormat.format(state.balance),
             style: const TextStyle(
-                color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildBalanceStat('Thu nhập', state.totalIncome,
-                  Icons.arrow_downward, Colors.greenAccent),
+              _buildBalanceStat(
+                'Thu nhập',
+                state.totalIncome,
+                Icons.arrow_downward,
+                Colors.greenAccent,
+              ),
               Container(height: 30, width: 1, color: Colors.white24),
-              _buildBalanceStat('Chi tiêu', state.totalExpense,
-                  Icons.arrow_upward, Colors.redAccent),
+              _buildBalanceStat(
+                'Chi tiêu',
+                state.totalExpense,
+                Icons.arrow_upward,
+                Colors.redAccent,
+              ),
             ],
           ),
         ],
@@ -512,7 +543,11 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildBalanceStat(
-      String label, double amount, IconData icon, Color iconColor) {
+    String label,
+    double amount,
+    IconData icon,
+    Color iconColor,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -520,18 +555,20 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             Icon(icon, color: iconColor, size: 16),
             const SizedBox(width: 4),
-            Text(label,
-                style:
-                    const TextStyle(color: Colors.white70, fontSize: 13)),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
           ],
         ),
         const SizedBox(height: 4),
         Text(
           _currencyFormat.format(amount),
           style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
         ),
       ],
     );
@@ -586,9 +623,13 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Text(cat,
-                        style: const TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text(
+                      cat,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 );
               }).toList(),
@@ -605,8 +646,11 @@ class _DashboardPageState extends State<DashboardPage> {
         padding: const EdgeInsets.all(32.0),
         child: Column(
           children: [
-            Icon(Icons.receipt_long_outlined,
-                size: 48, color: Colors.grey[400]),
+            Icon(
+              Icons.receipt_long_outlined,
+              size: 48,
+              color: Colors.grey[400],
+            ),
             const SizedBox(height: 12),
             Text(
               _selectedMonth != null
@@ -650,15 +694,18 @@ class _DashboardPageState extends State<DashboardPage> {
               builder: (context) => AlertDialog(
                 title: const Text('Xác nhận xóa'),
                 content: const Text(
-                    'Bạn có chắc chắn muốn xóa giao dịch này không?'),
+                  'Bạn có chắc chắn muốn xóa giao dịch này không?',
+                ),
                 actions: [
                   TextButton(
                     child: const Text('Hủy'),
                     onPressed: () => Navigator.of(context).pop(false),
                   ),
                   TextButton(
-                    child: const Text('Xóa',
-                        style: TextStyle(color: AppColors.error)),
+                    child: const Text(
+                      'Xóa',
+                      style: TextStyle(color: AppColors.error),
+                    ),
                     onPressed: () => Navigator.of(context).pop(true),
                   ),
                 ],
@@ -666,15 +713,16 @@ class _DashboardPageState extends State<DashboardPage> {
             );
           },
           onDismissed: (direction) {
-            context
-                .read<FinanceBloc>()
-                .add(DeleteTransactionEvent(transaction.id));
+            context.read<FinanceBloc>().add(
+              DeleteTransactionEvent(transaction.id),
+            );
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: const Text('Đã xóa giao dịch thành công'),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             );
           },
@@ -688,13 +736,17 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: color.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(_getCategoryIcon(transaction.category),
-                    color: color),
+                child: Icon(
+                  _getCategoryIcon(transaction.category),
+                  color: color,
+                ),
               ),
               title: Text(
                 transaction.title,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
               ),
               subtitle: Row(
                 children: [
@@ -706,7 +758,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 2),
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(8),
@@ -714,7 +768,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: Text(
                         'QT: ${transaction.importanceScore}/5',
                         style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.bold),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

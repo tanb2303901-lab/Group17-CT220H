@@ -10,10 +10,7 @@ import '../bloc/savings_state.dart';
 class SavingsPlannerPage extends StatefulWidget {
   final List<Transaction> expenses;
 
-  const SavingsPlannerPage({
-    super.key,
-    required this.expenses,
-  });
+  const SavingsPlannerPage({super.key, required this.expenses});
 
   @override
   State<SavingsPlannerPage> createState() => _SavingsPlannerPageState();
@@ -34,10 +31,7 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
     if (_formKey.currentState?.validate() ?? false) {
       final double target = double.parse(_targetController.text);
       BlocProvider.of<SavingsBloc>(context).add(
-        CalculatePlanEvent(
-          expenses: widget.expenses,
-          targetSavings: target,
-        ),
+        CalculatePlanEvent(expenses: widget.expenses, targetSavings: target),
       );
     }
   }
@@ -55,7 +49,11 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
     }
   }
 
-  String _getMascotAdviceForImpact(String level, double target, double savings) {
+  String _getMascotAdviceForImpact(
+    String level,
+    double target,
+    double savings,
+  ) {
     if (savings < target) {
       return "Tớ đã tính toán hết sức rồi! Kế hoạch này giúp bạn cắt giảm tối đa ${_currencyFormat.format(savings)}, chưa đạt mục tiêu ${_currencyFormat.format(target)} của bạn đâu. Hãy cân nhắc gia tăng nguồn thu nhập thêm nhé! 🐝";
     }
@@ -74,7 +72,10 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    double totalExpensesSum = widget.expenses.fold(0.0, (sum, e) => sum + e.amount);
+    double totalExpensesSum = widget.expenses.fold(
+      0.0,
+      (sum, e) => sum + e.amount,
+    );
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -84,9 +85,9 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
         title: Text(
           'Kế Hoạch Tiết Kiệm',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
-              ),
+            color: AppColors.primary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.primary),
@@ -110,12 +111,16 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                   children: [
                     const Text(
                       'Tổng chi tiêu tháng hiện tại có thể tối ưu:',
-                      style: TextStyle(fontSize: 14, color: AppColors.onSurfaceVariant),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.onSurfaceVariant,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       _currencyFormat.format(totalExpensesSum),
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      style: Theme.of(context).textTheme.headlineLarge
+                          ?.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold,
                           ),
@@ -123,7 +128,11 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                     const SizedBox(height: 4),
                     Text(
                       'Từ ${widget.expenses.length} khoản chi khác nhau',
-                      style: const TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ],
                 ),
@@ -143,8 +152,8 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                       Text(
                         'Bạn muốn tiết kiệm bao nhiêu?',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
@@ -189,7 +198,9 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                     child: Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Center(
-                        child: CircularProgressIndicator(color: AppColors.primary),
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   );
@@ -197,7 +208,10 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                   return Card(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(state.message, style: const TextStyle(color: AppColors.error)),
+                      child: Text(
+                        state.message,
+                        style: const TextStyle(color: AppColors.error),
+                      ),
                     ),
                   );
                 } else if (state is SavingsCalculated) {
@@ -220,7 +234,10 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                                   color: impactColor.withOpacity(0.1),
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Text('🍀', style: TextStyle(fontSize: 28)),
+                                child: const Text(
+                                  '🍀',
+                                  style: TextStyle(fontSize: 28),
+                                ),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -229,12 +246,22 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                                   children: [
                                     const Text(
                                       'Yêu Tinh Lucky khuyên bạn:',
-                                      style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.secondary),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.secondary,
+                                      ),
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      _getMascotAdviceForImpact(plan.impactLevel, state.targetSavings, plan.totalSavings),
-                                      style: const TextStyle(fontSize: 14, height: 1.4),
+                                      _getMascotAdviceForImpact(
+                                        plan.impactLevel,
+                                        state.targetSavings,
+                                        plan.totalSavings,
+                                      ),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        height: 1.4,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -254,32 +281,41 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                             children: [
                               Text(
                                 'Tóm Tắt Kế Hoạch',
-                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
                                       fontSize: 18,
                                       color: AppColors.primary,
                                     ),
                               ),
                               const Divider(height: 24),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('Mục tiêu đặt ra:'),
                                   Text(
                                     _currencyFormat.format(state.targetSavings),
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('Tiết kiệm tối ưu đề xuất:'),
                                   Text(
                                     _currencyFormat.format(plan.totalSavings),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: plan.totalSavings >= state.targetSavings
+                                      color:
+                                          plan.totalSavings >=
+                                              state.targetSavings
                                           ? Colors.green
                                           : Colors.orange,
                                     ),
@@ -288,11 +324,15 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('Mức độ ảnh hưởng cuộc sống:'),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: impactColor.withOpacity(0.2),
                                       borderRadius: BorderRadius.circular(12),
@@ -320,13 +360,15 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                         children: [
                           Text(
                             'Khoản Chi Nên Cắt Giảm',
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                  color: AppColors.onBackground,
-                                ),
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(color: AppColors.onBackground),
                           ),
                           Text(
                             '${plan.itemsToCut.length} khoản chi',
-                            style: const TextStyle(color: Colors.grey, fontSize: 13),
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 13,
+                            ),
                           ),
                         ],
                       ),
@@ -363,31 +405,50 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
-                                    easyToCut ? Icons.check_circle_outline : Icons.warning_amber_outlined,
-                                    color: easyToCut ? Colors.green : Colors.red,
+                                    easyToCut
+                                        ? Icons.check_circle_outline
+                                        : Icons.warning_amber_outlined,
+                                    color: easyToCut
+                                        ? Colors.green
+                                        : Colors.red,
                                   ),
                                 ),
                                 title: Text(
                                   item.title,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
                                 ),
                                 subtitle: Row(
                                   children: [
                                     Text(
                                       'Độ quan trọng: ${item.importanceScore}/5',
-                                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 12,
+                                      ),
                                     ),
                                     const SizedBox(width: 8),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                       decoration: BoxDecoration(
-                                        color: easyToCut ? Colors.green[50] : Colors.orange[50],
+                                        color: easyToCut
+                                            ? Colors.green[50]
+                                            : Colors.orange[50],
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(
-                                        easyToCut ? 'Dễ cắt giảm' : 'Nên cân nhắc',
+                                        easyToCut
+                                            ? 'Dễ cắt giảm'
+                                            : 'Nên cân nhắc',
                                         style: TextStyle(
-                                          color: easyToCut ? Colors.green : Colors.orange[800],
+                                          color: easyToCut
+                                              ? Colors.green
+                                              : Colors.orange[800],
                                           fontSize: 10,
                                           fontWeight: FontWeight.bold,
                                         ),

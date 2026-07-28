@@ -10,10 +10,7 @@ class MockAuthRepository implements AuthRepository {
 
   // Danh sách user giả lập (email -> {password, displayName})
   final Map<String, Map<String, String>> _mockUsers = {
-    'demo@beesaving.com': {
-      'password': '123456',
-      'displayName': 'Demo User',
-    },
+    'demo@beesaving.com': {'password': '123456', 'displayName': 'Demo User'},
   };
 
   @override

@@ -19,7 +19,7 @@ class AppColors {
   static const Color onSurface = Color(0xFF151D19);
   static const Color surfaceVariant = Color(0xFFDCE5DD);
   static const Color onSurfaceVariant = Color(0xFF3F4A3C);
-  
+
   static const Color surfaceContainerLow = Color(0xFFEDF6EE);
   static const Color surfaceContainer = Color(0xFFE7F0E8);
   static const Color surfaceContainerHigh = Color(0xFFE1EAE3);
@@ -38,7 +38,7 @@ class AppColors {
     Color(0xFF4CAF50),
     Color(0xFF006E1C),
   ];
-  
+
   static const List<Color> goldGradient = [
     Color(0xFFFFE16D),
     Color(0xFFFCD400),

@@ -131,9 +131,17 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                       fontSize: 12,
                     ),
                   ),
-                  avatar: const Icon(Icons.calendar_month, size: 14, color: AppColors.primary),
+                  avatar: const Icon(
+                    Icons.calendar_month,
+                    size: 14,
+                    color: AppColors.primary,
+                  ),
                   onPressed: _clearMonthFilter,
-                  deleteIcon: const Icon(Icons.close, size: 12, color: AppColors.primary),
+                  deleteIcon: const Icon(
+                    Icons.close,
+                    size: 12,
+                    color: AppColors.primary,
+                  ),
                   onDeleted: _clearMonthFilter,
                   backgroundColor: AppColors.primaryContainer.withOpacity(0.15),
                 ),
@@ -142,14 +150,20 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
             IconButton(
               icon: Icon(
                 Icons.filter_list_rounded,
-                color: _selectedMonth != null ? AppColors.primary : Colors.grey[600],
+                color: _selectedMonth != null
+                    ? AppColors.primary
+                    : Colors.grey[600],
               ),
               tooltip: 'Lọc theo tháng',
               onPressed: _showMonthPicker,
             ),
             // Nút làm mới
             IconButton(
-              icon: const Icon(Icons.refresh, color: AppColors.primary, size: 22),
+              icon: const Icon(
+                Icons.refresh,
+                color: AppColors.primary,
+                size: 22,
+              ),
               tooltip: 'Làm mới',
               onPressed: () {
                 context.read<FinanceBloc>().add(FetchTransactionsEvent());
@@ -166,8 +180,14 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         backgroundColor: Colors.white,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey[400],
-        selectedLabelStyle: GoogleFonts.quicksand(fontWeight: FontWeight.bold, fontSize: 12),
-        unselectedLabelStyle: GoogleFonts.quicksand(fontWeight: FontWeight.w600, fontSize: 12),
+        selectedLabelStyle: GoogleFonts.quicksand(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
+        unselectedLabelStyle: GoogleFonts.quicksand(
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

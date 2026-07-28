@@ -28,19 +28,21 @@ Future<void> init() async {
     print("BeeSaving DI: Tích hợp Firebase thành công.");
   } catch (e) {
     print(
-        "BeeSaving DI: Không thể khởi tạo Firebase (Có thể chưa cấu hình google-services.json). Sử dụng cơ sở dữ liệu giả lập (Local Mock DB). Chi tiết: $e");
+      "BeeSaving DI: Không thể khởi tạo Firebase (Có thể chưa cấu hình google-services.json). Sử dụng cơ sở dữ liệu giả lập (Local Mock DB). Chi tiết: $e",
+    );
   }
 
   // ── Auth Repository ──
   if (useFirebase) {
     sl.registerLazySingleton<AuthRepository>(() => FirebaseAuthRepository());
     sl.registerLazySingleton<TransactionRepository>(
-        () => FirebaseTransactionRepository());
+      () => FirebaseTransactionRepository(),
+    );
   } else {
-    sl.registerLazySingleton<AuthRepository>(
-        () => MockAuthRepository());
+    sl.registerLazySingleton<AuthRepository>(() => MockAuthRepository());
     sl.registerLazySingleton<TransactionRepository>(
-        () => LocalTransactionRepository());
+      () => LocalTransactionRepository(),
+    );
   }
 
   // ── Finance Use Cases ──
@@ -54,13 +56,13 @@ Future<void> init() async {
 
   // ── BLoCs ──
   sl.registerFactory(() => AuthBloc(authRepository: sl()));
-  sl.registerFactory(() => FinanceBloc(
-        getTransactions: sl(),
-        addTransaction: sl(),
-        updateTransaction: sl(),
-        deleteTransaction: sl(),
-      ));
-  sl.registerFactory(() => SavingsBloc(
-        calculateSavingsPlan: sl(),
-      ));
+  sl.registerFactory(
+    () => FinanceBloc(
+      getTransactions: sl(),
+      addTransaction: sl(),
+      updateTransaction: sl(),
+      deleteTransaction: sl(),
+    ),
+  );
+  sl.registerFactory(() => SavingsBloc(calculateSavingsPlan: sl()));
 }

@@ -13,7 +13,8 @@ class CalculateSavingsPlanParams {
   });
 }
 
-class CalculateSavingsPlan implements UseCase<SavingsPlan, CalculateSavingsPlanParams> {
+class CalculateSavingsPlan
+    implements UseCase<SavingsPlan, CalculateSavingsPlanParams> {
   @override
   Future<SavingsPlan> call(CalculateSavingsPlanParams params) async {
     final knapsackItems = params.expenses.map((expense) {

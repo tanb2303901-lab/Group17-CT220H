@@ -23,11 +23,11 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
     required AddTransaction addTransaction,
     required UpdateTransaction updateTransaction,
     required DeleteTransaction deleteTransaction,
-  })  : _getTransactions = getTransactions,
-        _addTransaction = addTransaction,
-        _updateTransaction = updateTransaction,
-        _deleteTransaction = deleteTransaction,
-        super(FinanceInitial()) {
+  }) : _getTransactions = getTransactions,
+       _addTransaction = addTransaction,
+       _updateTransaction = updateTransaction,
+       _deleteTransaction = deleteTransaction,
+       super(FinanceInitial()) {
     on<FetchTransactionsEvent>(_onFetchTransactions);
     on<AddTransactionEvent>(_onAddTransaction);
     on<UpdateTransactionEvent>(_onUpdateTransaction);
@@ -87,10 +87,7 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
     }
   }
 
-  void _onFilterByMonth(
-    FilterByMonthEvent event,
-    Emitter<FinanceState> emit,
-  ) {
+  void _onFilterByMonth(FilterByMonthEvent event, Emitter<FinanceState> emit) {
     _selectedMonth = event.month;
     emit(_buildLoadedState());
   }
@@ -115,7 +112,7 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
         totalExpense += transaction.amount;
         categoryExpenses[transaction.category] =
             (categoryExpenses[transaction.category] ?? 0.0) +
-                transaction.amount;
+            transaction.amount;
       }
     }
 

@@ -97,10 +97,18 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                       value: _sourceWallet,
                       decoration: const InputDecoration(
                         labelText: 'Ví nguồn (Từ)',
-                        prefixIcon: Icon(Icons.outbox_rounded, color: Colors.red),
+                        prefixIcon: Icon(
+                          Icons.outbox_rounded,
+                          color: Colors.red,
+                        ),
                       ),
-                      items: ['Ví chính', 'Ví tiết kiệm', 'Heo đất'].map((wallet) {
-                        return DropdownMenuItem(value: wallet, child: Text(wallet));
+                      items: ['Ví chính', 'Ví tiết kiệm', 'Heo đất'].map((
+                        wallet,
+                      ) {
+                        return DropdownMenuItem(
+                          value: wallet,
+                          child: Text(wallet),
+                        );
                       }).toList(),
                       onChanged: (val) {
                         if (val != null) {
@@ -115,10 +123,18 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                       value: _targetWallet,
                       decoration: const InputDecoration(
                         labelText: 'Ví đích (Đến)',
-                        prefixIcon: Icon(Icons.inbox_rounded, color: Colors.green),
+                        prefixIcon: Icon(
+                          Icons.inbox_rounded,
+                          color: Colors.green,
+                        ),
                       ),
-                      items: ['Ví chính', 'Ví tiết kiệm', 'Heo đất'].map((wallet) {
-                        return DropdownMenuItem(value: wallet, child: Text(wallet));
+                      items: ['Ví chính', 'Ví tiết kiệm', 'Heo đất'].map((
+                        wallet,
+                      ) {
+                        return DropdownMenuItem(
+                          value: wallet,
+                          child: Text(wallet),
+                        );
                       }).toList(),
                       onChanged: (val) {
                         if (val != null) {
@@ -134,7 +150,10 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         labelText: 'Số tiền chuyển (VND)',
-                        prefixIcon: Icon(Icons.monetization_on, color: Colors.orange),
+                        prefixIcon: Icon(
+                          Icons.monetization_on,
+                          color: Colors.orange,
+                        ),
                         hintText: 'Nhập số tiền...',
                       ),
                       validator: (value) {
@@ -151,9 +170,12 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
 
                         // Kiểm tra số dư ví nguồn
                         double sourceBalance = 0.0;
-                        if (_sourceWallet == 'Ví chính') sourceBalance = _mainWallet ?? 0;
-                        if (_sourceWallet == 'Ví tiết kiệm') sourceBalance = _savingsWallet ?? 0;
-                        if (_sourceWallet == 'Heo đất') sourceBalance = _piggyBank ?? 0;
+                        if (_sourceWallet == 'Ví chính')
+                          sourceBalance = _mainWallet ?? 0;
+                        if (_sourceWallet == 'Ví tiết kiệm')
+                          sourceBalance = _savingsWallet ?? 0;
+                        if (_sourceWallet == 'Heo đất')
+                          sourceBalance = _piggyBank ?? 0;
 
                         if (amount > sourceBalance) {
                           return 'Số dư ${_sourceWallet.toLowerCase()} không đủ (${_currencyFormat.format(sourceBalance)})';
@@ -170,26 +192,42 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                       ),
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          final double amount = double.parse(_amountController.text);
-                          
+                          final double amount = double.parse(
+                            _amountController.text,
+                          );
+
                           // Thực hiện chuyển khoản cục bộ
                           setState(() {
                             // Trừ ví nguồn
-                            if (_sourceWallet == 'Ví chính') _mainWallet = (_mainWallet ?? 0) - amount;
-                            if (_sourceWallet == 'Ví tiết kiệm') _savingsWallet = (_savingsWallet ?? 0) - amount;
-                            if (_sourceWallet == 'Heo đất') _piggyBank = (_piggyBank ?? 0) - amount;
+                            if (_sourceWallet == 'Ví chính')
+                              _mainWallet = (_mainWallet ?? 0) - amount;
+                            if (_sourceWallet == 'Ví tiết kiệm')
+                              _savingsWallet = (_savingsWallet ?? 0) - amount;
+                            if (_sourceWallet == 'Heo đất')
+                              _piggyBank = (_piggyBank ?? 0) - amount;
 
                             // Cộng ví đích
-                            if (_targetWallet == 'Ví chính') _mainWallet = (_mainWallet ?? 0) + amount;
-                            if (_targetWallet == 'Ví tiết kiệm') _savingsWallet = (_savingsWallet ?? 0) + amount;
-                            if (_targetWallet == 'Heo đất') _piggyBank = (_piggyBank ?? 0) + amount;
+                            if (_targetWallet == 'Ví chính')
+                              _mainWallet = (_mainWallet ?? 0) + amount;
+                            if (_targetWallet == 'Ví tiết kiệm')
+                              _savingsWallet = (_savingsWallet ?? 0) + amount;
+                            if (_targetWallet == 'Heo đất')
+                              _piggyBank = (_piggyBank ?? 0) + amount;
                           });
 
                           Navigator.pop(ctx);
-                          _showSuccessDialog(context, _sourceWallet, _targetWallet, amount);
+                          _showSuccessDialog(
+                            context,
+                            _sourceWallet,
+                            _targetWallet,
+                            amount,
+                          );
                         }
                       },
-                      child: const Text('Xác nhận chuyển', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        'Xác nhận chuyển',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -201,12 +239,19 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
     );
   }
 
-  void _showSuccessDialog(BuildContext context, String from, String to, double amount) {
+  void _showSuccessDialog(
+    BuildContext context,
+    String from,
+    String to,
+    double amount,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
             child: Column(
@@ -234,7 +279,10 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                 Text(
                   'Bạn đã chuyển thành công ${_currencyFormat.format(amount)} từ $from sang $to để tiết kiệm.',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppColors.onSurfaceVariant, height: 1.4),
+                  style: const TextStyle(
+                    color: AppColors.onSurfaceVariant,
+                    height: 1.4,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -257,13 +305,16 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
     return BlocBuilder<FinanceBloc, FinanceState>(
       builder: (context, state) {
         if (state is FinanceLoading) {
-          return const Center(child: CircularProgressIndicator(color: AppColors.primary));
+          return const Center(
+            child: CircularProgressIndicator(color: AppColors.primary),
+          );
         } else if (state is FinanceError) {
           return Center(child: Text(state.message));
         } else if (state is FinanceLoaded) {
           _syncBalances(state.balance);
 
-          final totalAsset = (_mainWallet ?? 0) + (_savingsWallet ?? 0) + (_piggyBank ?? 0);
+          final totalAsset =
+              (_mainWallet ?? 0) + (_savingsWallet ?? 0) + (_piggyBank ?? 0);
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
@@ -275,7 +326,9 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
-                    side: BorderSide(color: AppColors.primary.withOpacity(0.15)),
+                    side: BorderSide(
+                      color: AppColors.primary.withOpacity(0.15),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -283,7 +336,11 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                       children: [
                         const Text(
                           'Tổng tài sản thực tế',
-                          style: TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         Text(
@@ -313,7 +370,10 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                   const SizedBox(height: 12),
                   Card(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24,
+                        horizontal: 16,
+                      ),
                       child: Column(
                         children: [
                           SizedBox(
@@ -326,23 +386,38 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                                   PieChartSectionData(
                                     color: Colors.green[600]!,
                                     value: _mainWallet ?? 0,
-                                    title: '${((_mainWallet ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
+                                    title:
+                                        '${((_mainWallet ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
                                     radius: 50,
-                                    titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                    titleStyle: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   PieChartSectionData(
                                     color: Colors.blue[600]!,
                                     value: _savingsWallet ?? 0,
-                                    title: '${((_savingsWallet ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
+                                    title:
+                                        '${((_savingsWallet ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
                                     radius: 50,
-                                    titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                    titleStyle: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   PieChartSectionData(
                                     color: Colors.orange[600]!,
                                     value: _piggyBank ?? 0,
-                                    title: '${((_piggyBank ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
+                                    title:
+                                        '${((_piggyBank ?? 0) / totalAsset * 100).toStringAsFixed(0)}%',
                                     radius: 50,
-                                    titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                    titleStyle: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -353,7 +428,10 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               _buildLegendItem('Ví chính', Colors.green[600]!),
-                              _buildLegendItem('Ví tiết kiệm', Colors.blue[600]!),
+                              _buildLegendItem(
+                                'Ví tiết kiệm',
+                                Colors.blue[600]!,
+                              ),
                               _buildLegendItem('Heo đất', Colors.orange[600]!),
                             ],
                           ),
@@ -381,10 +459,19 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                         backgroundColor: AppColors.primary.withOpacity(0.08),
                         foregroundColor: AppColors.primary,
                         shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
                       ),
                       icon: const Icon(Icons.swap_horiz, size: 18),
-                      label: const Text('Chuyển tiền', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      label: const Text(
+                        'Chuyển tiền',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       onPressed: () => _showTransferBottomSheet(context),
                     ),
                   ],
@@ -438,7 +525,10 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 4),
-        Text(name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+        Text(
+          name,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        ),
       ],
     );
   }

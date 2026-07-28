@@ -24,9 +24,7 @@ class BeeSavingApp extends StatelessWidget {
         BlocProvider<FinanceBloc>(
           create: (context) => sl<FinanceBloc>()..add(FetchTransactionsEvent()),
         ),
-        BlocProvider<SavingsBloc>(
-          create: (context) => sl<SavingsBloc>(),
-        ),
+        BlocProvider<SavingsBloc>(create: (context) => sl<SavingsBloc>()),
       ],
       child: MaterialApp(
         title: 'BeeSaving',
@@ -37,10 +35,7 @@ class BeeSavingApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en', ''),
-          Locale('vi', ''),
-        ],
+        supportedLocales: const [Locale('en', ''), Locale('vi', '')],
         home: const SplashPage(),
       ),
     );

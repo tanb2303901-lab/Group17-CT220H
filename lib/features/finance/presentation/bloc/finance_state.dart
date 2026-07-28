@@ -13,7 +13,7 @@ class FinanceInitial extends FinanceState {}
 class FinanceLoading extends FinanceState {}
 
 class FinanceLoaded extends FinanceState {
-  final List<Transaction> transactions;    // danh sách đã lọc (theo tháng)
+  final List<Transaction> transactions; // danh sách đã lọc (theo tháng)
   final List<Transaction> allTransactions; // toàn bộ giao dịch
   final double totalIncome;
   final double totalExpense;
@@ -33,14 +33,14 @@ class FinanceLoaded extends FinanceState {
 
   @override
   List<Object?> get props => [
-        transactions,
-        allTransactions,
-        totalIncome,
-        totalExpense,
-        balance,
-        categoryExpenses,
-        selectedMonth,
-      ];
+    transactions,
+    allTransactions,
+    totalIncome,
+    totalExpense,
+    balance,
+    categoryExpenses,
+    selectedMonth,
+  ];
 }
 
 class FinanceError extends FinanceState {

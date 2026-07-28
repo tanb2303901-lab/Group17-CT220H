@@ -11,7 +11,9 @@ class FirebaseTransactionRepository implements TransactionRepository {
 
   @override
   Future<List<Transaction>> getTransactions() async {
-    final querySnapshot = await _collection.orderBy('date', descending: true).get();
+    final querySnapshot = await _collection
+        .orderBy('date', descending: true)
+        .get();
     return querySnapshot.docs.map((doc) {
       return TransactionModel.fromJson(doc.data(), doc.id);
     }).toList();

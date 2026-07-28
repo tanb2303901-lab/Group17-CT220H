@@ -66,10 +66,12 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   void _onSignIn() {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<AuthBloc>().add(SignInRequested(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          ));
+      context.read<AuthBloc>().add(
+        SignInRequested(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
     }
   }
 
@@ -88,7 +90,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           );
         }
@@ -352,7 +355,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   onChanged: (v) => setState(() => _rememberMe = v ?? false),
                   activeColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -424,7 +428,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => const RegisterPage()),
+                            builder: (_) => const RegisterPage(),
+                          ),
                         );
                       },
                       child: Text(

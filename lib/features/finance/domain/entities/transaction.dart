@@ -23,5 +23,13 @@ class Transaction extends Equatable {
   bool get isIncome => type == 'income';
 
   @override
-  List<Object?> get props => [id, title, amount, type, category, date, importanceScore];
+  List<Object?> get props => [
+    id,
+    title,
+    amount,
+    type,
+    category,
+    date,
+    importanceScore,
+  ];
 }

@@ -42,7 +42,10 @@ class KnapsackSolver {
     }
 
     double totalAmount = items.fold(0.0, (sum, item) => sum + item.amount);
-    int totalImportance = items.fold(0, (sum, item) => sum + item.importanceScore);
+    int totalImportance = items.fold(
+      0,
+      (sum, item) => sum + item.importanceScore,
+    );
 
     // Case 1: Target is greater than or equal to total expenses.
     // Must cut everything to get as close as possible.
@@ -76,18 +79,26 @@ class KnapsackSolver {
     }
 
     int capacity = (rawCapacity / scalingFactor).floor();
-    List<int> weights = items.map((item) => (item.amount / scalingFactor).ceil()).toList();
-    
-    // Map importance score (1-5) to exponentially higher values 
+    List<int> weights = items
+        .map((item) => (item.amount / scalingFactor).ceil())
+        .toList();
+
+    // Map importance score (1-5) to exponentially higher values
     // so that cutting a high importance item is heavily penalized compared to many low importance items.
     List<int> values = items.map((item) {
       switch (item.importanceScore) {
-        case 1: return 1;
-        case 2: return 10;
-        case 3: return 100;
-        case 4: return 1000;
-        case 5: return 10000;
-        default: return 1;
+        case 1:
+          return 1;
+        case 2:
+          return 10;
+        case 3:
+          return 100;
+        case 4:
+          return 1000;
+        case 5:
+          return 10000;
+        default:
+          return 1;
       }
     }).toList();
 
