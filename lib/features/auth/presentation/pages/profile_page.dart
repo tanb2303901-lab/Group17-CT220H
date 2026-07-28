@@ -161,11 +161,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                       side: BorderSide(
-                        color: badgeColor.withOpacity(0.2),
+                        color: badgeColor.withValues(alpha: 0.2),
                         width: 1.5,
                       ),
                     ),
-                    color: badgeColor.withOpacity(0.06),
+                    color: badgeColor.withValues(alpha: 0.06),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
@@ -173,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: badgeColor.withOpacity(0.15),
+                              color: badgeColor.withValues(alpha: 0.15),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -406,7 +406,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         value: value,
-        activeColor: AppColors.primary,
+        activeThumbColor: AppColors.primary,
         onChanged: onChanged,
       ),
     );

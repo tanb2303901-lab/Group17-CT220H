@@ -8,9 +8,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
   StreamSubscription? _authSubscription;
 
-  AuthBloc({required AuthRepository authRepository})
-    : _authRepository = authRepository,
-      super(AuthInitial()) {
+  AuthBloc({required this._authRepository})
+    : super(AuthInitial()) {
     on<AuthCheckRequested>(_onAuthCheckRequested);
     on<SignInRequested>(_onSignInRequested);
     on<RegisterRequested>(_onRegisterRequested);
@@ -31,7 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
         return AuthUnauthenticated();
       },
-      onError: (_, __) => AuthUnauthenticated(),
+      onError: (_, _) => AuthUnauthenticated(),
     );
   }
 

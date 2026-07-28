@@ -20,11 +20,9 @@ class AppTheme {
         onError: AppColors.onError,
         errorContainer: AppColors.errorContainer,
         onErrorContainer: AppColors.onErrorContainer,
-        background: AppColors.background,
-        onBackground: AppColors.onBackground,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,
-        surfaceVariant: AppColors.surfaceVariant,
+        surfaceContainerHighest: AppColors.surfaceVariant,
         onSurfaceVariant: AppColors.onSurfaceVariant,
         outline: AppColors.outline,
       ),
@@ -70,7 +68,7 @@ class AppTheme {
             width: 1,
           ),
         ),
-        shadowColor: AppColors.primary.withOpacity(0.1),
+        shadowColor: AppColors.primary.withValues(alpha: 0.1),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

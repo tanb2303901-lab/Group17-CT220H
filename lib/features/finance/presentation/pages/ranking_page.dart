@@ -156,7 +156,7 @@ class RankingPage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: color.withOpacity(0.1),
+                            color: color.withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -251,7 +251,7 @@ class RankingPage extends StatelessWidget {
         // Card Tóm tắt
         Card(
           color: totalUnessentialSum > 2000000
-              ? AppColors.errorContainer.withOpacity(0.4)
+              ? AppColors.errorContainer.withValues(alpha: 0.4)
               : AppColors.surfaceContainerLow,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -296,7 +296,7 @@ class RankingPage extends StatelessWidget {
           color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: BorderSide(color: AppColors.primary.withOpacity(0.1)),
+            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.1)),
           ),
           child: Padding(
             padding: const EdgeInsets.all(14.0),
@@ -477,7 +477,7 @@ class RankingPage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: color.withOpacity(0.1),
+                            color: color.withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -563,7 +563,7 @@ class RankingPage extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(

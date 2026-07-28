@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(32),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.06),
+                        color: AppColors.primary.withValues(alpha: 0.06),
                         blurRadius: 24,
                         offset: const Offset(0, -4),
                       ),
@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.3),
+                              color: AppColors.primary.withValues(alpha: 0.3),
                               blurRadius: 20,
                               offset: const Offset(0, 8),
                             ),
@@ -236,7 +236,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               border: Border.all(color: AppColors.primaryContainer, width: 2),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.08),
+                  color: AppColors.primary.withValues(alpha: 0.08),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -382,7 +382,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder(),
                 elevation: 4,
-                shadowColor: AppColors.primary.withOpacity(0.4),
+                shadowColor: AppColors.primary.withValues(alpha: 0.4),
               ),
               child: isLoading
                   ? const SizedBox(

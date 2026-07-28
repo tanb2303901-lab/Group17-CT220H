@@ -109,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage>
                 width: 220,
                 height: 220,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryContainer.withOpacity(0.12),
+                  color: AppColors.primaryContainer.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage>
                 width: 280,
                 height: 280,
                 decoration: BoxDecoration(
-                  color: AppColors.secondaryContainer.withOpacity(0.18),
+                  color: AppColors.secondaryContainer.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -146,13 +146,13 @@ class _RegisterPageState extends State<RegisterPage>
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.08),
+                            color: AppColors.primary.withValues(alpha: 0.08),
                             blurRadius: 20,
                             offset: const Offset(0, 4),
                           ),
                         ],
                         border: Border.all(
-                          color: AppColors.outline.withOpacity(0.15),
+                          color: AppColors.outline.withValues(alpha: 0.15),
                         ),
                       ),
                       child: Padding(
@@ -237,7 +237,7 @@ class _RegisterPageState extends State<RegisterPage>
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(0.2),
+                        color: AppColors.primary.withValues(alpha: 0.2),
                         width: 2,
                       ),
                     ),
@@ -255,7 +255,7 @@ class _RegisterPageState extends State<RegisterPage>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withValues(alpha: 0.3),
                           blurRadius: 16,
                           offset: const Offset(0, 6),
                         ),
@@ -451,7 +451,7 @@ class _RegisterPageState extends State<RegisterPage>
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder(),
                 elevation: 4,
-                shadowColor: AppColors.primary.withOpacity(0.4),
+                shadowColor: AppColors.primary.withValues(alpha: 0.4),
               ),
               child: isLoading
                   ? const SizedBox(

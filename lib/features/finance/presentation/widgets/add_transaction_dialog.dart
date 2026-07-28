@@ -278,7 +278,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                   children: [
                     Expanded(
                       child: DropdownButtonFormField<String>(
-                        value: _category,
+                        initialValue: _category,
                         decoration: const InputDecoration(
                           labelText: 'Danh mục',
                           prefixIcon: Icon(Icons.category),

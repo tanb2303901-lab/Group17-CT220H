@@ -19,15 +19,11 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
   DateTime? _selectedMonth;
 
   FinanceBloc({
-    required GetTransactions getTransactions,
-    required AddTransaction addTransaction,
-    required UpdateTransaction updateTransaction,
-    required DeleteTransaction deleteTransaction,
-  }) : _getTransactions = getTransactions,
-       _addTransaction = addTransaction,
-       _updateTransaction = updateTransaction,
-       _deleteTransaction = deleteTransaction,
-       super(FinanceInitial()) {
+    required this._getTransactions,
+    required this._addTransaction,
+    required this._updateTransaction,
+    required this._deleteTransaction,
+  }) : super(FinanceInitial()) {
     on<FetchTransactionsEvent>(_onFetchTransactions);
     on<AddTransactionEvent>(_onAddTransaction);
     on<UpdateTransactionEvent>(_onUpdateTransaction);

@@ -8,7 +8,7 @@ import 'features/auth/presentation/bloc/auth_event.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/finance/presentation/bloc/finance_bloc.dart';
 import 'features/finance/presentation/bloc/finance_event.dart';
-import 'features/finance/presentation/pages/main_navigation_page.dart';
+
 import 'features/savings/presentation/bloc/savings_bloc.dart';
 
 class BeeSavingApp extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import '../../features/finance/domain/repositories/transaction_repository.dart';
 import '../../features/finance/data/repositories/local_transaction_repository.dart';
 import '../../features/finance/data/repositories/firebase_transaction_repository.dart';
@@ -25,9 +26,9 @@ Future<void> init() async {
       await Firebase.initializeApp();
     }
     useFirebase = true;
-    print("BeeSaving DI: Tích hợp Firebase thành công.");
+    debugPrint("BeeSaving DI: Tích hợp Firebase thành công.");
   } catch (e) {
-    print(
+    debugPrint(
       "BeeSaving DI: Không thể khởi tạo Firebase (Có thể chưa cấu hình google-services.json). Sử dụng cơ sở dữ liệu giả lập (Local Mock DB). Chi tiết: $e",
     );
   }

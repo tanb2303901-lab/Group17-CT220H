@@ -236,7 +236,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     color: AppColors.primary,
                   ),
                   onDeleted: _clearMonthFilter,
-                  backgroundColor: AppColors.primaryContainer.withOpacity(0.2),
+                  backgroundColor: AppColors.primaryContainer.withValues(alpha: 0.2),
                 ),
               ),
             // ── Filter button ──
@@ -308,7 +308,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: AppColors.secondaryContainer
-                                      .withOpacity(0.2),
+                                      .withValues(alpha: 0.2),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Text(
@@ -448,9 +448,9 @@ class _DashboardPageState extends State<DashboardPage> {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(0.08),
+        color: AppColors.primary.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
       ),
       child: Row(
         children: [
@@ -493,7 +493,7 @@ class _DashboardPageState extends State<DashboardPage> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 16,
             offset: const Offset(0, 8),
           ),
@@ -734,7 +734,7 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

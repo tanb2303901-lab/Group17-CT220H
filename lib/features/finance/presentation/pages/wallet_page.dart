@@ -94,7 +94,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
 
                     // Ví nguồn
                     DropdownButtonFormField<String>(
-                      value: _sourceWallet,
+                      initialValue: _sourceWallet,
                       decoration: const InputDecoration(
                         labelText: 'Ví nguồn (Từ)',
                         prefixIcon: Icon(
@@ -120,7 +120,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
 
                     // Ví đích
                     DropdownButtonFormField<String>(
-                      value: _targetWallet,
+                      initialValue: _targetWallet,
                       decoration: const InputDecoration(
                         labelText: 'Ví đích (Đến)',
                         prefixIcon: Icon(
@@ -170,12 +170,15 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
 
                         // Kiểm tra số dư ví nguồn
                         double sourceBalance = 0.0;
-                        if (_sourceWallet == 'Ví chính')
+                        if (_sourceWallet == 'Ví chính') {
                           sourceBalance = _mainWallet ?? 0;
-                        if (_sourceWallet == 'Ví tiết kiệm')
+                        }
+                        if (_sourceWallet == 'Ví tiết kiệm') {
                           sourceBalance = _savingsWallet ?? 0;
-                        if (_sourceWallet == 'Heo đất')
+                        }
+                        if (_sourceWallet == 'Heo đất') {
                           sourceBalance = _piggyBank ?? 0;
+                        }
 
                         if (amount > sourceBalance) {
                           return 'Số dư ${_sourceWallet.toLowerCase()} không đủ (${_currencyFormat.format(sourceBalance)})';
@@ -199,20 +202,26 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                           // Thực hiện chuyển khoản cục bộ
                           setState(() {
                             // Trừ ví nguồn
-                            if (_sourceWallet == 'Ví chính')
+                            if (_sourceWallet == 'Ví chính') {
                               _mainWallet = (_mainWallet ?? 0) - amount;
-                            if (_sourceWallet == 'Ví tiết kiệm')
+                            }
+                            if (_sourceWallet == 'Ví tiết kiệm') {
                               _savingsWallet = (_savingsWallet ?? 0) - amount;
-                            if (_sourceWallet == 'Heo đất')
+                            }
+                            if (_sourceWallet == 'Heo đất') {
                               _piggyBank = (_piggyBank ?? 0) - amount;
+                            }
 
                             // Cộng ví đích
-                            if (_targetWallet == 'Ví chính')
+                            if (_targetWallet == 'Ví chính') {
                               _mainWallet = (_mainWallet ?? 0) + amount;
-                            if (_targetWallet == 'Ví tiết kiệm')
+                            }
+                            if (_targetWallet == 'Ví tiết kiệm') {
                               _savingsWallet = (_savingsWallet ?? 0) + amount;
-                            if (_targetWallet == 'Heo đất')
+                            }
+                            if (_targetWallet == 'Heo đất') {
                               _piggyBank = (_piggyBank ?? 0) + amount;
+                            }
                           });
 
                           Navigator.pop(ctx);
@@ -327,7 +336,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
                     side: BorderSide(
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                     ),
                   ),
                   child: Padding(
@@ -456,7 +465,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                     ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary.withOpacity(0.08),
+                        backgroundColor: AppColors.primary.withValues(alpha: 0.08),
                         foregroundColor: AppColors.primary,
                         shadowColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(
@@ -551,7 +560,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colors.first.withOpacity(0.3),
+            color: colors.first.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),

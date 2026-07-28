@@ -231,7 +231,7 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: impactColor.withOpacity(0.1),
+                                  color: impactColor.withValues(alpha: 0.1),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Text(
@@ -334,7 +334,7 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: impactColor.withOpacity(0.2),
+                                      color: impactColor.withValues(alpha: 0.2),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Text(
@@ -380,7 +380,7 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                             child: Text(
                               'Không cần cắt giảm khoản nào cả! Bạn đã đạt mục tiêu rồi hoặc không có khoản chi nào để tối ưu.',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(color: Colors.grey),
+                              style: TextStyle(color: Colors.grey),
                             ),
                           ),
                         )
@@ -400,8 +400,8 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     color: easyToCut
-                                        ? Colors.green.withOpacity(0.1)
-                                        : Colors.red.withOpacity(0.1),
+                                        ? Colors.green.withValues(alpha: 0.1)
+                                        : Colors.red.withValues(alpha: 0.1),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
@@ -477,7 +477,7 @@ class _SavingsPlannerPageState extends State<SavingsPlannerPage> {
                     child: Text(
                       'Hãy nhập số tiền mục tiêu và nhấn nút để tớ phân tích chi tiêu tối ưu cho bạn nhé!',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.grey, height: 1.4),
+                      style: TextStyle(color: Colors.grey, height: 1.4),
                     ),
                   ),
                 );

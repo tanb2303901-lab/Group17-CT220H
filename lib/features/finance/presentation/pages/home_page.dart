@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                       side: BorderSide(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                       ),
                     ),
                     color: AppColors.white,
@@ -145,8 +145,8 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppColors.secondaryContainer.withOpacity(
-                                0.2,
+                              color: AppColors.secondaryContainer.withValues(
+                                alpha: 0.2,
                               ),
                               shape: BoxShape.circle,
                             ),
@@ -384,7 +384,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 16,
             offset: const Offset(0, 8),
           ),
@@ -509,9 +509,9 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.08),
+                color: color.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
-                border: Border.all(color: color.withOpacity(0.15)),
+                border: Border.all(color: color.withValues(alpha: 0.15)),
               ),
               child: Icon(icon, color: color, size: 24),
             ),
@@ -560,7 +560,7 @@ class _HomePageState extends State<HomePage> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: recent.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      separatorBuilder: (_, _) => const SizedBox(height: 8),
       itemBuilder: (context, index) {
         final transaction = recent[index];
         final isExpense = transaction.isExpense;
@@ -573,7 +573,7 @@ class _HomePageState extends State<HomePage> {
             leading: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
