@@ -34,9 +34,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run code generator (build_runner)
-        run: dart run build_runner build --delete-conflicting-outputs
-
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
@@ -93,9 +90,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Run code generator
-        run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Build debug APK
         if: github.event_name == 'pull_request'
