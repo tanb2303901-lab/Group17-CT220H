@@ -14,6 +14,7 @@ import '../../../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../../../features/auth/presentation/bloc/auth_event.dart';
 import '../../../../features/auth/presentation/bloc/auth_state.dart';
 import '../../../../features/auth/presentation/pages/login_page.dart';
+import 'package:beesaving/features/finance/domain/entities/transaction.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
